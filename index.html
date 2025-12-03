@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Password Generator</title>
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #1a1a1a;
+        color: white;
+        text-align: center;
+        padding: 40px;
+    }
+
+    .container {
+        background: #222;
+        padding: 30px;
+        max-width: 400px;
+        margin: auto;
+        border-radius: 12px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        border-radius: 8px;
+        border: none;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    button {
+        margin-top: 15px;
+        padding: 12px 20px;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        color: white;
+    }
+
+    .generate-btn {
+        background: #4CAF50;
+    }
+
+    .generate-btn:hover {
+        background: #45a049;
+    }
+
+    .copy-btn {
+        background: #007BFF;
+    }
+
+    .copy-btn:hover {
+        background: #0066d6;
+    }
+</style>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>🔐 Strong Password Generator</h2>
+
+    <input type="text" id="password" placeholder="Your password appears here" readonly>
+
+    <button class="generate-btn" onclick="generatePassword()">Generate Password</button>
+    <button class="copy-btn" onclick="copyPassword()">Copy Password</button>
+</div>
+
+<script>
+function generatePassword(length = 16) {
+    const chars =
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+    let pass = "";
+    for (let i = 0; i < length; i++) {
+        pass += chars[Math.floor(Math.random() * chars.length)];
+    }
+
+    document.getElementById("password").value = pass;
+}
+
+function copyPassword() {
+    const input = document.getElementById("password");
+
+    if (!input.value) {
+        alert("No password to copy!");
+        return;
+    }
+
+    input.select();
+    input.setSelectionRange(0, 99999); 
+    document.execCommand("copy");
+
+    alert("Password copied!");
+}
+</script>
+
+</body>
+</html>
